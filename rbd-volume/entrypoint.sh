@@ -37,6 +37,9 @@ function unmap {
 	/usr/bin/rbd unmap $( /usr/bin/rbd showmapped | grep -m 1 -E "^[0-9]{1,3}\s+${RBD_POOL}\s+${RBD_IMAGE}" | awk '{print $5}' )
 }
 
+get_config &&
+check_config &&
+
 case "$@" in
 	"map" ) map;;
 	"mount" ) mount;;
