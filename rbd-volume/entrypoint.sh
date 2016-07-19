@@ -50,6 +50,13 @@ case "$KV_TYPE" in
       ;;
 esac
 
+function check_config {
+if [[ ! -e /etc/ceph/${CLUSTER}.conf ]]; then
+  echo "ERROR- /etc/ceph/${CLUSTER}.conf must exist; get it from your existing mon"
+  exit 1
+fi
+}
+
 # Map the rbd volume
 function map {
 	/usr/bin/rbd map ${RBD_IMAGE} --pool ${RBD_POOL} -o ${RBD_OPTS}
