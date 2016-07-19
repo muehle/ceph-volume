@@ -9,8 +9,12 @@
 #
 # VERSION 0.0.2
 
-FROM ceph/daemon
+FROM ceph/base
 MAINTAINER Michael Mauracher "michael@websr.eu"
+
+ADD ./confd/templates/* /etc/confd/templates/
+ADD ./confd/conf.d/* /etc/confd/conf.d/
+ADD config.*.sh ceph.defaults /
 
 # Add mountWait
 ADD mountWait/mountWait /mountWait
