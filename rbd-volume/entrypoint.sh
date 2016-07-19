@@ -7,6 +7,15 @@ set -e
 : ${RBD_FS:=xfs}
 : ${RBD_TARGET:=/mnt/rbd}
 
+case "$KV_TYPE" in
+   etcd|consul)
+      source /config.kv.sh
+      ;;
+   *)
+      source /config.static.sh
+      ;;
+esac
+
 # Map the rbd volume
 function map {
 	/usr/bin/rbd map ${RBD_IMAGE} --pool ${RBD_POOL} -o ${RBD_OPTS}
